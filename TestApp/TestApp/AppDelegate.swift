@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         if let window = window {
             let navigationController = UINavigationController()
-            navigationController.viewControllers = [MainViewController()]
+            navigationController.viewControllers = [MainViewController(viewModel: MainViewModel())]
             window.rootViewController = navigationController
             window.makeKeyAndVisible()
-            
+            navigationController.setupNavigationController()
         }
         return true
     }
