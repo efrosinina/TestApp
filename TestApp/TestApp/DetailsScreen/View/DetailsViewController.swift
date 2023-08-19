@@ -10,8 +10,9 @@ import UIKit
 class DetailsViewController: UIViewController {
     //MARK: -- GUI Variables
     private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.separatorStyle = .none
+        tableView.register(InfoDetailsTableViewCell.self, forCellReuseIdentifier: "InfoDetailsTableViewCell")
         tableView.register(TitleForHeaderInSections.self, forHeaderFooterViewReuseIdentifier: "TitleForHeaderInSections")
         tableView.dataSource = self
         tableView.delegate = self
@@ -62,19 +63,18 @@ extension DetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        cell.textLabel?.text = "Hello world: section: 12345"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "InfoDetailsTableViewCell", for: indexPath) as? InfoDetailsTableViewCell else { return UITableViewCell() }
+        cell.layer.masksToBounds = true
         return cell
     }
 }
 
 extension DetailsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 20))
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TitleForHeaderInSections") as? TitleForHeaderInSections else { fatalError("Failed to create header cell") }
         let title = viewModel.sections[section]
         header.configure(with: title)

@@ -31,12 +31,14 @@ class TitleForHeaderInSections: UITableViewHeaderFooterView {
         self.backgroundView = customView
         
         addSubview(label)
-        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: self.layoutMarginsGuide.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
