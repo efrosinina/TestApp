@@ -13,12 +13,16 @@ class MainViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "MainCollectionViewCell")
-        collectionView.backgroundColor = UIColor(red: 0.0157, green: 0.0471, blue: 0.1176, alpha: 1.0)
+        collectionView.backgroundColor = defaultColor
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    //MARK: -- Properties
+    private var viewModel: MainViewModelProtocol
+    private let defaultColor = UIColor(red: 0.0157, green: 0.0471, blue: 0.1176, alpha: 1.0)
     
     //MARK: -- Life cycle
     override func viewDidLoad() {
@@ -26,9 +30,6 @@ class MainViewController: UIViewController {
         
         setupUI()
     }
-    
-    //MARK: -- Properties
-    private var viewModel: MainViewModelProtocol
     
     //MARK: -- Initializations
     init(viewModel: MainViewModelProtocol) {
@@ -43,7 +44,7 @@ class MainViewController: UIViewController {
     
     //MARK: -- Private Methods
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0.0157, green: 0.0471, blue: 0.1176, alpha: 1.0)
+        view.backgroundColor = defaultColor
         title = "Characters"
         view.addSubview(collectionView)
         navigationController?.navigationBar.prefersLargeTitles = true
