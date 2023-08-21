@@ -12,7 +12,7 @@ struct Character: Codable {
     let name: String?
     let status: Status?
     let species: Species
-    let type: String?
+    let type: String
     let gender: Gender
     let origin: Origin
     let location: Location
